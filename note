@@ -1,0 +1,36 @@
+The read.c is now integrated to the main function to read an rt file. I will split it according to the norm after making sure it works perfectly. I made test.rt for testing any objects, so just execute:
+./miniRT ./test.rt
+
+Since the mandatory .rt files are supposed to create scenes where we see the objects, we can assume that:
+right = normal vector 1,0,0
+left = -1,0,0
+up = 0,1,0
+down = 0,-1,0
+forward = 0,0,1
+backward = 0,0,-1
+
+
+Process:
+-validate
+-set up the scene from .rt
+-generate 3d objects, light, camera
+-set camera position
+-calculate if camera ray vector hits the object, and the magnitude of this vector
+-calculate colour for the pixel based on the distance
+-add ambient light
+-add light
+-render the scene
+
+What it does currently:
+-Initialises the window, can exit by clicking the cross or with esc
+-Reads any .rt file and converts the values from there to the mrt struct
+-renders a sphere object based on it's coordinates with a simple shading based on the distance
+-Calculates the camera rotation
+
+Functions needed:
+-Calculate the magnitude of each ray from the camera to a cylinder and pass this value to calculate_colour() in the form of the "t" variable'
+-Same for plane
+-Handling multiple objects in the scene simultaneously
+
+-Improve ambient light
+-Improve light source
