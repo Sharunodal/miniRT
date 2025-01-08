@@ -1,3 +1,5 @@
+Jan 8th Added spherical linear interpolation. It doesn't work perfectly yet and gets stuck at certain values.
+
 The read.c is now integrated to the main function to read an rt file. I will split it according to the norm after making sure it works perfectly. I made test.rt for testing any objects, so just execute:
 ./miniRT ./test.rt
 
@@ -23,14 +25,12 @@ Process:
 
 What it does currently:
 -Initialises the window, can exit by clicking the cross or with esc
+-The user is able to select objects and move them around
 -Reads any .rt file and converts the values from there to the mrt struct
--renders a sphere object based on it's coordinates with a simple shading based on the distance
 -Calculates the camera rotation
+-renders objects with basic lighting
 
 Functions needed:
--Calculate the magnitude of each ray from the camera to a cylinder and pass this value to calculate_colour() in the form of the "t" variable'
--Same for plane
--Handling multiple objects in the scene simultaneously
-
+-Calculate cylinder normal vector in the render calculate_colour() function
 -Improve ambient light
--Improve light source
+-Handling the light. Trace the ray from the light source and check if it hits and object. The current light diffusion model is not a ray tracing model, it is only temporary for testing other functions
