@@ -6,24 +6,11 @@
 /*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:35:24 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/08 14:36:14 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:03:59 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-t_vec4	angle_to_quaternion(t_vec3 *axis, float angle)
-{
-	t_vec4	result;
-	float	sin_half_angle;
-
-	sin_half_angle = sinf(angle * 0.5);
-	result.x = axis->x * sin_half_angle;
-	result.y = axis->y * sin_half_angle;
-	result.z = axis->z * sin_half_angle;
-	result.w = cosf(angle);
-	return (result);
-}
 
 t_vec4	linear_interpolation(t_vec4 *q1, t_vec4 *q2, float t)
 {
@@ -33,6 +20,7 @@ t_vec4	linear_interpolation(t_vec4 *q1, t_vec4 *q2, float t)
 	result.y = q1->y + t * (q2->y - q1->y);
 	result.z = q1->z + t * (q2->z - q1->z);
 	result.w = q1->w + t * (q2->w - q1->w);
+	vec4_normalise(&result);
 	return (result);
 }
 
@@ -45,9 +33,10 @@ t_vec4	spherical_linear_interpolation(t_vec4 *q1, t_vec4 *q2, float t)
 	float	theta;
 
 	dot = vec4_dot(q1, q2);
-	if (dot > 0.9998f)//if the quaternions are too close, do linear interpolation
+	//if the quaternions are too close, do linear interpolation
+	if (dot > 0.9998f)
 		return (linear_interpolation(q1, q2, t));
-	//if negative, flip one q to ensure the shortest path
+	//if negative, flip one quaternion to ensure the shortest path
 	if (dot < 0.0f)
 	{
 		q2->x = -q2->x;

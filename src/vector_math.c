@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:51:45 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/08 13:39:57 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/09 09:52:19 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ t_vec3	vec3_crossproduct(t_vec3 a, t_vec3 b)
 	return (result);
 }
 
-//If the result is positive, the vectors point roughly in the same direction, if negative, they point in opposite directions. If the number is as large as possible (a * b), the vectors point in the same direction
+/**
+ * @brief
+ * If the result is positive, the vectors point roughly in the same direction,
+ * if negative, they point in opposite directions. If the number is as large
+ * as possible (a * b), the vectors point in the same direction
+ */
 float	vec3_dot(t_vec3 a, t_vec3 b)
 {
 	float	result;
@@ -92,7 +97,7 @@ t_vec3	vec3_project(t_vec3 a, t_vec3 b)
 
 /*
 	@function
-	To caculate the lenght of a vector.
+	To caculate the lenght of a vector, also can be called as magnitude.
 */
 float	vec3_length(t_vec3 v)
 {

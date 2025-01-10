@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:39:02 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/08 10:02:06 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/01/09 15:03:04 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ void	check_base_colour(t_object *object, t_colour *col, float t)
 		col->green = 255;
 	if (col->blue > 255)
 		col->blue = 255;
+}
+
+int	hitpoint_to_lightsource(t_minirt *mrt, t_camera *camera_ray, float t)
+{
+	t_vec3	intersection;
+	float	object_to_light_distance;
+
+	//added this mainly so that mrt is used in this incomplete function
+	if (mrt->object_count == 0)
+		return (1);
+	//calculate camera ray and object intersection point
+	intersection = vec3_add(camera_ray->position, vec3_scale(camera_ray->direction, t));
+	//add a function to calculate if the ray from the intersection is able to reach the light, or does it hit an object first. We can also return the length instead of int 1 or 0
+	object_to_light_distance = 1.0f;
+	if (object_to_light_distance > 0.0f)
+		return (1);
+	return (0);
 }
 
 //Check what colour the pixel should be depending on if and how the camera rays hit the object
@@ -87,8 +104,9 @@ int	calculate_colour(t_minirt *mrt, t_vec2 *pixel)
 	if (t > 0)
 	{
 		check_base_colour(&mrt->object[object_id], &colour, t);
-		//light_diffusion can be removed after ray tracing is done
-		light_diffusion(mrt, &camera_ray, &mrt->object[object_id], &colour, t);
+		//if the ray from the object reaches the light source, add light multiplier
+		if (hitpoint_to_lightsource(mrt, &camera_ray, t) == 1)
+			light_diffusion(mrt, &camera_ray, &mrt->object[object_id], &colour, t);
 		add_ambient_light(&colour, mrt->ambient.brightness);
 		return((colour.red << 16) | (colour.green << 8) | colour.blue);
 	}

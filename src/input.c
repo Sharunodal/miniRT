@@ -6,59 +6,61 @@
 /*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:32:19 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/08 14:37:00 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:21:45 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	camera_controls(int keycode, t_minirt *mrt)
+int	camera_rotation(int keycode, t_camera *camera)
+{
+	t_vec3	rotation_axis;
+	t_vec4	target_quaternion;
+
+	rotation_axis.x = 0;
+	rotation_axis.y = 0;
+	rotation_axis.z = 0;
+	if (keycode == 101)
+		rotation_axis.y = -1.0f;
+	else if (keycode == 113)
+		rotation_axis.y = 1.0f;
+	else if (keycode == 122)
+		rotation_axis.x = 1.0f;
+	else if (keycode == 120)
+		rotation_axis.x = -1.0f;
+	else
+		return (1);
+	target_quaternion = angle_to_quaternion(&rotation_axis, 0.1f);
+	camera->rotation = vec4_multiply(&camera->rotation, &target_quaternion);
+	camera->direction = quaternion_to_vec3(&camera->rotation);
+	return (0);
+}
+
+int	camera_controls(int keycode, t_camera *camera)
 {
 	if (keycode == 97)
-		mrt->camera.position.x -= 0.5;
+		camera->position.x -= 0.5;
 	else if (keycode == 100)
-		mrt->camera.position.x += 0.5;
+		camera->position.x += 0.5;
 	else if (keycode == 114)
-		mrt->camera.position.y += 0.5;
+		camera->position.y += 0.5;
 	else if (keycode == 102)
-		mrt->camera.position.y -= 0.5;
+		camera->position.y -= 0.5;
 	else if (keycode == 119)
-		mrt->camera.position.z += 0.5;
+		camera->position.z += 0.5;
 	else if (keycode == 115)
-		mrt->camera.position.z -= 0.5;
-	else if (keycode == 101)
-	{
-		mrt->camera.direction.x += 0.1;
-		if (mrt->camera.direction.x > 1.0)
-			mrt->camera.direction.x = -1.0;
-	}
-	else if (keycode == 113)
-	{
-		mrt->camera.direction.x -= 0.1;
-		if (mrt->camera.direction.x < -1.0)
-			mrt->camera.direction.x = 1.0;
-	}
-	else if (keycode == 122)
-	{
-		mrt->camera.direction.y += 0.1;
-		if (mrt->camera.direction.y > 1.0)
-			mrt->camera.direction.y = -1.0;
-	}
-	else if (keycode == 120)
-	{
-		mrt->camera.direction.y -= 0.1;
-		if (mrt->camera.direction.y < -1.0)
-			mrt->camera.direction.y = 1.0;
-	}
+		camera->position.z -= 0.5;
+	else if (keycode == 101 || keycode == 113 || keycode == 122 || keycode == 120)
+		return (camera_rotation(keycode, camera));
 	else
 		return (1);
 	return (0);
 }
 
+//Checks which axis is used to rotate around based on the input, calculates the angle into a quaternion representation, then applies it to the current rotation value of the selected object and sets the xyz orientation based on the xyzw rotation for the rendering
 int	object_rotation(int keycode, t_object *object)
 {
 	t_vec3	rotation_axis;
-	t_vec4	current_quaternion;
 	t_vec4	target_quaternion;
 
 	rotation_axis.x = 0;
@@ -72,10 +74,10 @@ int	object_rotation(int keycode, t_object *object)
 		rotation_axis.z = 1.0f;
 	else
 		return (1);
-	current_quaternion = vec3_to_quaternion(&object->orientation);
 	target_quaternion = angle_to_quaternion(&rotation_axis, 0.1f);
-	current_quaternion = spherical_linear_interpolation(&current_quaternion, &target_quaternion, 0.1f);
-	object->orientation = quaternion_to_vec3(&current_quaternion);
+	//object->rotation = spherical_linear_interpolation(&object->rotation, &target_quaternion, 0.1f);//Can make the rotation smoother, but doesn't seem necessary
+	object->rotation = vec4_multiply(&object->rotation, &target_quaternion);
+	object->orientation = quaternion_to_vec3(&object->rotation);
 	return (0);
 }
 
@@ -96,7 +98,7 @@ int	object_controls(int keycode, t_minirt *mrt, int object_id)
 	else if (keycode == 106 || keycode == 107 || keycode == 108)
 		return (object_rotation(keycode, &mrt->object[object_id]));
 	else
-		return (camera_controls(keycode, mrt));
+		return (camera_controls(keycode, &mrt->camera));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:55:13 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/08 14:38:19 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:49:11 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include <math.h>
+#include <stdbool.h>
 
 # define FLOAT_MAX 340282346638528859811704183484516925440.0
 # define DEGREE_TO_RADIAN 0.008726646259971647737
@@ -81,22 +82,32 @@ typedef struct s_equation
 	float	t2;
 }			t_equation;
 
-/*
-	parameters for all kinds shapes:
-	position: the coordinates of the center point of the plane shape
-	orientation (normal): the normal vector. should be int the range[-1,1] for each axis.
-	color: represent in RGB[0,255]
-	radius: used in shpere and cylinder shape, 1/2 of diameter.
-	height: used in cylinder shape.
-*/
+/**
+ * 	@brief
+ * 	parameters for all kinds shapes.
+ *
+ * 	position: the coordinates of the center point of the plane shape
+ * 	orientation (normal): the normalized vector, as unit vector.
+ * 	rotation: quaternion used to calculate accurate object rotation.
+ * 	color: represent in RGB[0,255]
+ * 	radius: used in shpere and cylinder shape.
+ * 	height: used in cylinder shape.
+ * 	cap_t: the top center of a cylinder.
+ * 	cap_b: the bottom center of a cyliner.
+ * 	cy_hp: The projection position of the intersection point on the cylinder axis.
+ */
 typedef struct s_object
 {
 	t_shape		shape;
 	t_vec3		position;
 	t_vec3		orientation;
+	t_vec4		rotation;
 	t_colour	colour;
 	float		radius;
 	float		height;
+	t_vec3		cap_t;
+	t_vec3		cap_b;
+	t_vec3		cy_hp;
 }	t_object;
 
 
@@ -104,6 +115,7 @@ typedef struct s_camera
 {
 	t_vec3		position;
 	t_vec3		direction;
+	t_vec4		rotation;
 	t_vec3		right;
 	t_vec3		up;
 	float		aspect_ratio;
