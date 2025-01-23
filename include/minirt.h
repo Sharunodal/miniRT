@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:55:13 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/17 09:48:02 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:59:54 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 # define FLOAT_MAX 340282346638528859811704183484516925440.0
 # define DEGREE_TO_RADIAN 0.008726646259971647737
-# define WIN_WIDTH 300
-# define WIN_HEIGHT 300
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 800
 # define EPSILON 1e-6
 
 /***  define colour***/
@@ -93,6 +93,12 @@ typedef struct s_equation
  * 	height: used in cylinder shape.
  * 	cy_hit_normal: the normal vector for the intersection point;(calculate it
  * 	in ray_intersection_plane/sphere/cylinder functions)
+ * 	camera_inside: save the information of the camera is inside of a
+ * 	cylinder or a sphere, but for plane, it means it is on the bottom side of
+ * 	the plane(against the plane normal vector)
+ * 	light_inside: save the information of the camera is inside of a
+ * 	cylinder or a sphere, but for plane, it means it is on the bottom side of
+ * 	the plane(against the plane normal vector)
  */
 typedef struct s_object
 {
@@ -104,6 +110,8 @@ typedef struct s_object
 	t_colour	colour;
 	float		radius;
 	float		height;
+	bool		camera_inside;
+	bool		light_inside;
 	t_vec3		cy_hit_normal;
 }	t_object;
 
@@ -167,6 +175,7 @@ int			check_sphere_data(t_minirt *mrt, char **values);
 int			check_light_data(t_minirt *mrt, char **values);
 int			check_camera_data(t_minirt *mrt, char **values);
 int			check_ambient_data(t_minirt *mrt, char **values);
+int			check_number_of_variables(char **values, int min, int max);
 int			add_colour_values(t_colour *colour, char *str, char *target);
 int			add_xyz_values(t_vec3 *xyz, char *str, char *target, int type);
 int			write_error(char *str);
@@ -174,6 +183,8 @@ int			ft_strcmp(const char *s1, const char *s2);
 int			validate_number_array(char **array, int type);
 int			validate_decimal_string(char *str);
 float		ft_atofloat(char *str);
+int			read_close_return(int fd);
+int			allocate_new_object(t_minirt *mrt);
 
 /**** vector_math ****/
 void		vec3_normalise(t_vec3 *vector);
@@ -202,7 +213,7 @@ float		intersects_cylinder_side(t_camera *ray, t_object *cylinder);
 
 /**** render ****/
 void		render(t_minirt *mrt);
-t_vec3		get_hit_normal(t_object *ob, t_vec3 hit_point, t_vec3 l_dir);
+t_vec3		get_hit_normal(t_object *ob, t_vec3 hit_point);
 t_camera	create_camera_ray(t_camera *camera, t_vec2 *pixel);
 void		modulate_colour(t_colour *colour, float light_intensity);
 float		diffusion(t_minirt *mrt, t_camera *camera_ray, t_object *object,
@@ -210,6 +221,7 @@ float		diffusion(t_minirt *mrt, t_camera *camera_ray, t_object *object,
 int			calculate_colour(t_minirt *mrt, t_vec2 *pixel);
 bool		is_intersected(t_camera *ray, t_object *ob, float *t);
 bool		is_obscured_from_hitpoint_to_light(t_object *ob, t_minirt *mrt,
-		t_camera *c_ray, float t);
+				t_camera *c_ray, float t);
+void		set_camera_light_position_info_for_objects(t_minirt *mrt);
 
 #endif

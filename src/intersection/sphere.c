@@ -6,12 +6,18 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:24:20 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/14 13:29:09 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:51:49 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-//calculate if the camera ray hits the radius of the sphere from it's center
+
+/**
+ *  @brief
+ * 	calculate if the camera ray hits the radius of the sphere from it's center.
+ * 	If the discriminant result is positive, there are two intersections, if zero,
+ * 	there is one intersection, if negative there are none
+ */
 float	ray_intersects_sphere(t_camera *camera_ray, t_object *sphere)
 {
 	t_vec3		camera_distance;

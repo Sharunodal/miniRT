@@ -6,30 +6,19 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 09:15:37 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/17 13:37:22 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/17 10:16:33 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/**
- * Updates the camera up and right vectors based on the global up vector.
- */
 static void	update_up_right_vectors(t_camera *camera)
 {
 	t_vec3	up;
 
-	up.y = 0.0f;
-	if (camera->direction.y > 0.9f)
-		up.x = 1.0f;
-	else if (camera->direction.y < -0.9f)
-		up.x = -1.0f;
-	else
-	{
-		up.x = 0.0f;
-		up.y = 1.0f;
-	}
-	up.z = 0.0f;
+	up.x = 0;
+	up.y = 1;
+	up.z = -EPSILON;
 	camera->right = vec3_crossproduct(camera->direction, up);
 	vec3_normalise(&camera->right);
 	camera->up = vec3_crossproduct(camera->right, camera->direction);

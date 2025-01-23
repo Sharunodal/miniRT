@@ -6,7 +6,7 @@
 /*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 09:10:59 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/16 09:12:02 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/22 09:45:51 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ static int	adjust_light_brightness(int keycode, t_ray *light)
 int	light_controls(int keycode, t_ray *light)
 {
 	if (keycode == 65431)
-		light->position.z -= 0.5;
-	else if (keycode == 65437)
 		light->position.z += 0.5;
+	else if (keycode == 65437)
+		light->position.z -= 0.5;
 	else if (keycode == 65430)
-		light->position.x += 0.5;
-	else if (keycode == 65432)
 		light->position.x -= 0.5;
+	else if (keycode == 65432)
+		light->position.x += 0.5;
 	else if (keycode == 65429)
 		light->position.y += 0.5;
 	else if (keycode == 65436)

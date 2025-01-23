@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 08:53:16 by jingwu            #+#    #+#             */
-/*   Updated: 2025/01/16 10:57:45 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/01/22 09:29:13 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ float	ray_intersects_cylinder(t_camera *ray, t_object *cy)
 	if (t_closest == t_side)
 		cy->cy_hit_normal = get_side_hit_normal(ray, cy, t_side);
 	else if (t_closest == t_top)
-		cy->cy_hit_normal = vec3_scale(cy->orientation, -1);
-	else
 		cy->cy_hit_normal = cy->orientation;
+	else
+		cy->cy_hit_normal = vec3_scale(cy->orientation, -1);
 	return (t_closest);
 }

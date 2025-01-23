@@ -6,16 +6,19 @@
 /*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:41:36 by arissane          #+#    #+#             */
-/*   Updated: 2024/07/12 09:49:42 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:27:00 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*free_address(char **str)
+char	*free_address(char **str)
 {
-	free(*str);
-	*str = NULL;
+	if (str && *str)
+	{
+		free(*str);
+		*str = NULL;
+	}
 	return (NULL);
 }
 

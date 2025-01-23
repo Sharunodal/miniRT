@@ -6,7 +6,7 @@
 /*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:41:52 by arissane          #+#    #+#             */
-/*   Updated: 2024/07/12 09:52:04 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:19:50 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,10 @@ char	*strjoin_gnl(char *saved_text, char *buffer)
 	str = malloc(sizeof(char) * len + 1);
 	if (str == NULL)
 	{
-		free(saved_text);
-		return (NULL);
+		return (free_address(&saved_text));
 	}
 	str = strjoinh_gnl(saved_text, buffer, str);
-	free(saved_text);
+	free_address(&saved_text);
 	return (str);
 }
 

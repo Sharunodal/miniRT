@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:34:10 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/16 10:57:20 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/01/22 10:03:27 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vec3	vec3_scale(t_vec3 vector, float scale)
 
 /**
  * @function
- * Caluate the project of vector a on vector b. Using when caculating the
+ * Compute the project of vector a on vector b. Using when caculating the
  * ray intersection of cylinder.
 */
 t_vec3	vec3_project(t_vec3 a, t_vec3 b)

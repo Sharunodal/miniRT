@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:41:10 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/16 12:52:28 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/22 10:49:16 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static t_vec3	calculate_hit_point(t_object *ob, t_camera *c_ray, float t)
 	t_vec3	offset_normal;
 
 	hit_point = vec3_add(c_ray->position, vec3_scale(c_ray->direction, t));
-	offset_normal = vec3_scale(get_hit_normal(ob, hit_point, c_ray->direction),
-			0.0001f);
+	offset_normal = vec3_scale(get_hit_normal(ob, hit_point), 0.0001f);
 	hit_point = vec3_add(hit_point, offset_normal);
 	return (hit_point);
 }

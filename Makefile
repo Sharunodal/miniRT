@@ -6,7 +6,7 @@
 #    By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 10:50:10 by arissane          #+#    #+#              #
-#    Updated: 2025/01/16 12:47:07 by arissane         ###   ########.fr        #
+#    Updated: 2025/01/22 12:44:06 by jingwu           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,8 @@ SRCS = main.c \
 	   sphere.c \
 	   cylinder.c \
           intersects_cylinder_side.c \
+       set_camera_light_position_info_for_objects.c \
+       read_rt_object_allocate_memory.c
 
 OBJS_DIR = ./obj
 OBJS = $(patsubst %.c, $(OBJS_DIR)/%.o, $(SRCS))

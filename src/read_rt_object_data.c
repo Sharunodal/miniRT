@@ -3,54 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   read_rt_object_data.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:55:05 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/16 12:25:36 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:57:19 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	allocate_new_object(t_minirt *mrt)
-{
-	int			i;
-	t_object	*new_array;
-
-	i = 0;
-	if (mrt->object_count == 0)
-	{
-		mrt->object = ft_calloc(2, sizeof(t_object));
-		if (!mrt->object)
-			return (write_error("allocation failure"));
-	}
-	else
-	{
-		new_array = ft_calloc(mrt->object_count + 1, sizeof(t_object));
-		if (!new_array)
-			return (write_error("allocation failure"));
-		while (i < mrt->object_count)
-		{
-			new_array[i] = mrt->object[i];
-			i++;
-		}
-		free(mrt->object);
-		mrt->object = new_array;
-	}
-	return (0);
-}
-
 int	check_sphere_data(t_minirt *mrt, char **values)
 {
-	int			i;
 	t_object	sphere;
 
-	i = 0;
 	if (allocate_new_object(mrt) == 1)
 		return (1);
-	while (values[i])
-		i++;
-	if (i != 4)
+	if (check_number_of_variables(values, 4, 4) == 1)
 		return (write_error("Invalid number of variables for a sphere"));
 	sphere.shape = SPHERE;
 	sphere.id = mrt->object_count + 1;
@@ -60,6 +28,8 @@ int	check_sphere_data(t_minirt *mrt, char **values)
 	if (validate_decimal_string(values[2]) == 1)
 		return (write_error("Sphere diameter should be a decimal number"));
 	sphere.radius = ft_atofloat(values[2]);
+	if (sphere.radius < 0.0f)
+		return (write_error("Sphere diameter should be positive"));
 	if (sphere.radius != 0)
 		sphere.radius = sphere.radius / 2;
 	if (add_colour_values(&sphere.colour, values[3], "Sphere ") == 1)
@@ -71,15 +41,11 @@ int	check_sphere_data(t_minirt *mrt, char **values)
 
 int	check_plane_data(t_minirt *mrt, char **values)
 {
-	int			i;
 	t_object	plane;
 
-	i = 0;
 	if (allocate_new_object(mrt) == 1)
 		return (1);
-	while (values[i])
-		i++;
-	if (i != 4)
+	if (check_number_of_variables(values, 4, 4) == 1)
 		return (write_error("Invalid number of variables for a plane"));
 	plane.shape = PLANE;
 	plane.id = mrt->object_count + 1;
@@ -103,11 +69,15 @@ static int	check_cylinder_data2(t_object *cylinder, char **values)
 	if (validate_decimal_string(values[3]) == 1)
 		return (write_error("Cylinder diameter should be a decimal number"));
 	cylinder->radius = ft_atofloat(values[3]);
+	if (cylinder->radius < 0.0f)
+		return (write_error("Cylinder diameter should be positive"));
 	if (cylinder->radius != 0)
 		cylinder->radius = cylinder->radius / 2;
 	if (validate_decimal_string(values[4]) == 1)
 		return (write_error("Cylinder height should be a decimal number"));
 	cylinder->height = ft_atofloat(values[4]);
+	if (cylinder->height < 0.0f)
+		return (write_error("Cylinder height should be positive"));
 	if (add_colour_values(&cylinder->colour, values[5], "Cyinder ") == 1)
 		return (1);
 	return (0);
@@ -115,15 +85,11 @@ static int	check_cylinder_data2(t_object *cylinder, char **values)
 
 int	check_cylinder_data(t_minirt *mrt, char **values)
 {
-	int			i;
 	t_object	cylinder;
 
-	i = 0;
 	if (allocate_new_object(mrt) == 1)
 		return (1);
-	while (values[i])
-		i++;
-	if (i != 6)
+	if (check_number_of_variables(values, 6, 6) == 1)
 		return (write_error("Cylinder; invalid number of variables"));
 	cylinder.shape = CYLINDER;
 	cylinder.id = mrt->object_count + 1;

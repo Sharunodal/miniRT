@@ -6,7 +6,7 @@
 /*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:28:39 by arissane          #+#    #+#             */
-/*   Updated: 2024/07/21 11:17:37 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:13:04 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 char	*get_next_line(int fd);
+char	*free_address(char **str);
 char	*strchr_gnl(char *str, int c);
 char	*strjoin_gnl(char *saved_text, char *buffer);
 char	*substr_gnl(char *saved_text, size_t start, size_t len, size_t i);

@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:13:34 by jingwu            #+#    #+#             */
-/*   Updated: 2025/01/16 12:47:49 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/22 09:48:31 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * 	change the colour with a multiplier of the distance from the camera and
  * 	clamp it to a range of 0-255
  */
-void	check_base_colour(t_object *object, t_colour *col, float t)
+static void	check_base_colour(t_object *object, t_colour *col, float t)
 {
 	float	depth;
 	float	max_distance;
@@ -86,20 +86,23 @@ int	calculate_colour(t_minirt *mrt, t_vec2 *pixel)
 	t_camera	camera_ray;
 	t_colour	colour;
 	float		t;
-	int			object_id;
+	int			id;
 	float		intensity;
 
 	t = -1;
-	object_id = 0;
+	id = 0;
 	intensity = 0;
 	camera_ray = create_camera_ray(&mrt->camera, pixel);
-	check_intersection(mrt, &camera_ray, &t, &object_id);
+	check_intersection(mrt, &camera_ray, &t, &id);
 	if (t > 0)
 	{
-		check_base_colour(&mrt->object[object_id], &colour, t);
-		if (is_obscured_from_hitpoint_to_light(&mrt->object[object_id],
-				mrt, &camera_ray, t) == false)
-			intensity = diffusion(mrt, &camera_ray, &mrt->object[object_id], t);
+		check_base_colour(&mrt->object[id], &colour, t);
+		if (mrt->object[id].camera_inside == mrt->object[id].light_inside)
+		{
+			if (is_obscured_from_hitpoint_to_light(&mrt->object[id],
+					mrt, &camera_ray, t) == false)
+				intensity = diffusion(mrt, &camera_ray, &mrt->object[id], t);
+		}
 		intensity += mrt->ambient.brightness;
 		modulate_colour(&colour, intensity);
 		return ((colour.red << 16) | (colour.green << 8) | colour.blue);

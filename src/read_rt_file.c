@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:17:00 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/16 10:18:01 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:57:54 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	read_rt_file(t_minirt *mrt, char *file)
 	int		check;
 	char	*line;
 
-	check = 0;
 	if (valid_file_name(file) == false)
 		return (write_error("The extension of the file is wrong"));
 	fd = open(file, O_RDONLY);
@@ -106,7 +105,6 @@ int	read_rt_file(t_minirt *mrt, char *file)
 		return (write_error("Couldn't find or open the .rt file"));
 	while (1)
 	{
-		line = NULL;
 		line = get_next_line(fd);
 		if (!line)
 			break ;
@@ -114,7 +112,8 @@ int	read_rt_file(t_minirt *mrt, char *file)
 		check = check_line(mrt, line);
 		free(line);
 		if (check == 1)
-			return (1);
+			return (read_close_return(fd));
 	}
+	close(fd);
 	return (0);
 }

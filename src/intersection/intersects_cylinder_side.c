@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 09:48:45 by jingwu            #+#    #+#             */
-/*   Updated: 2025/01/16 10:57:52 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/01/21 09:12:42 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static float	get_closest_t(float *t, float *t_closest, t_camera *ray,
 {
 	int		i;
 	float	tmp;
-	t_vec3	point;
-	t_vec3	vector;
+	t_vec3	hit_point;
+	t_vec3	center_to_point;
 	float	h;
 
 	i = -1;
@@ -52,9 +52,9 @@ static float	get_closest_t(float *t, float *t_closest, t_camera *ray,
 		tmp = t[i];
 		if (tmp < 0)
 			continue ;
-		point = vec3_add(ray->position, vec3_scale(ray->direction, tmp));
-		vector = vec3_subtract(point, cy->position);
-		h = vec3_dot(vector, cy->orientation);
+		hit_point = vec3_add(ray->position, vec3_scale(ray->direction, tmp));
+		center_to_point = vec3_subtract(hit_point, cy->position);
+		h = vec3_dot(center_to_point, cy->orientation);
 		if (h >= -cy->height / 2 && h <= cy->height / 2)
 		{
 			if (*t_closest < 0 || tmp < *t_closest)
