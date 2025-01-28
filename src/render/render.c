@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:39:02 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/21 12:14:42 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/01/24 14:05:39 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	render(t_minirt *mrt)
 	int		colour;
 	t_vec2	pixel;
 
+	mrt->light_on_surface = false;
 	set_camera_light_position_info_for_objects(mrt);
 	pixel.y = 0;
 	while (pixel.y < WIN_HEIGHT)

@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:13:34 by jingwu            #+#    #+#             */
-/*   Updated: 2025/01/22 09:48:31 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/01/27 11:00:47 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,17 @@ static void	check_intersection(t_minirt *mrt, t_camera *camera_ray,
 	}
 }
 
+static float	update_intensity(t_object *ob, t_minirt *mrt,
+	t_camera *camera_ray, float t)
+{
+	float	intensity;
+
+	intensity = 0.0;
+	if (is_obscured_from_hitpoint_to_light(ob, mrt, camera_ray, t) == false)
+		intensity = diffusion(mrt, camera_ray, ob, t);
+	return (intensity);
+}
+
 /**
  *  @brief
  * 	Check what colour the pixel should be depending on if and how the camera
@@ -97,11 +108,11 @@ int	calculate_colour(t_minirt *mrt, t_vec2 *pixel)
 	if (t > 0)
 	{
 		check_base_colour(&mrt->object[id], &colour, t);
-		if (mrt->object[id].camera_inside == mrt->object[id].light_inside)
+		if (mrt->light_on_surface == false)
 		{
-			if (is_obscured_from_hitpoint_to_light(&mrt->object[id],
-					mrt, &camera_ray, t) == false)
-				intensity = diffusion(mrt, &camera_ray, &mrt->object[id], t);
+			if (mrt->object[id].camera_inside == mrt->object[id].light_inside)
+				intensity = update_intensity(&mrt->object[id], mrt,
+						&camera_ray, t);
 		}
 		intensity += mrt->ambient.brightness;
 		modulate_colour(&colour, intensity);

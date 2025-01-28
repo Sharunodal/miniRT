@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_controls.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 09:16:27 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/16 09:28:55 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:06:16 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static int	object_rotation(int keycode, t_object *object)
 	object->rotation = vec4_multiply(&object->rotation,
 			&target_quaternion);
 	object->orientation = quaternion_to_vec3(&object->rotation);
+	vec3_normalise(&object->orientation);
 	return (0);
 }
 

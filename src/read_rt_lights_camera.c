@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:03:10 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/23 13:39:06 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:03:43 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	check_camera_data(t_minirt *mrt, char **values)
 	if (add_xyz_values(&mrt->camera.direction, values[2],
 			"Camera orientation ", 2) == 1)
 		return (1);
-	mrt->camera.rotation = vec3_to_quaternion(&mrt->camera.direction);
 	mrt->camera.fov = ft_atoi(values[3]);
 	if (mrt->camera.fov < 0 || mrt->camera.fov > 180)
 		return (write_error("Camera FOV should be between 0 to 180"));

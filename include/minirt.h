@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:55:13 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/23 08:59:54 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:03:44 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@
 # include <math.h>
 # include <stdbool.h>
 
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 300
+# endif
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 300
+# endif
 # define FLOAT_MAX 340282346638528859811704183484516925440.0
 # define DEGREE_TO_RADIAN 0.008726646259971647737
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 800
 # define EPSILON 1e-6
+# define M_PI 3.14159265358979323846
 
 /***  define colour***/
 # define GR "\033[0;32m"
@@ -119,7 +124,6 @@ typedef struct s_camera
 {
 	t_vec3		position;
 	t_vec3		direction;
-	t_vec4		rotation;
 	t_vec3		right;
 	t_vec3		up;
 	float		aspect_ratio;
@@ -148,6 +152,7 @@ typedef struct s_minirt
 	int			light_count;
 	int			camera_count;
 	int			object_count;
+	bool		light_on_surface;
 	t_ray		ambient;
 	t_camera	camera;
 	t_ray		light;
@@ -166,6 +171,7 @@ int			object_controls(int keycode, t_minirt *mrt, int object_id);
 int			camera_controls(int keycode, t_camera *camera);
 int			light_controls(int keycode, t_ray *light);
 int			adjust_ambient_brightness(int keycode, t_ray *ambient);
+void		build_rotation_matrix(char axis, float angle, float matrix[3][3]);
 
 /**** read rt file ****/
 int			read_rt_file(t_minirt *mrt, char *file);

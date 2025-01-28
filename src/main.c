@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:53:49 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/23 13:44:16 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:04:36 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ static void	print_controls(void)
 	ft_putstr_fd("* Y-axis: K\n     * Z-axis: L\n", 1);
 	ft_putstr_fd(GR" - Resize\n"RS"     * Diameter(-/+): </>\n     ", 1);
 	ft_putstr_fd("* Height(-/+): N/M\n", 1);
-	ft_putstr_fd(BL"\nCamera controls:\n"RS GR" - Translation\n"RS, 1);
+	ft_putstr_fd(BL"\nCamera controls(based on global x,y and z):\n"RS
+		GR" - Translation\n"RS, 1);
 	ft_putstr_fd("     * Left/Right: A/D\n     * Up/Down: R/F\n     ", 1);
 	ft_putstr_fd("* Forward/Backward: W/S\n", 1);
 	ft_putstr_fd(GR" - Rotation\n"RS"     * X-axis(up/down): Z/X\n     ", 1);
-	ft_putstr_fd("* Y-axis(left/right): Q/E\n     * Z-axis: C/V\n", 1);
+	ft_putstr_fd("* Y-axis(left/right): Q/E\n     * Z-axis(left/right): "
+		"C/V\n", 1);
 	ft_putstr_fd(BL"\nLight controls:\n"RS GR" - Translation\n"RS"     * "
 		"Left/Right: 4/6\n     * Up/Down: 7/1\n     * Forward/Backward: 8/5\n",
 		1);
@@ -49,7 +51,7 @@ static int	check_window_size(void)
 		|| WIN_HEIGHT > 2000)
 	{
 		ft_putstr_fd("Error\nWindow width/height should be"
-			"between 50 and 2000", 2);
+			" between 50 and 2000\n", 2);
 		return (1);
 	}
 	return (0);
