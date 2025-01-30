@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:55:13 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/30 11:12:02 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:57:07 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,8 @@ typedef struct s_minirt
 	int			camera_count;
 	int			object_count;
 	bool		light_on_surface;
+	t_colour	base_colour;
+	t_colour	ambient_added;
 	t_ray		ambient;
 	t_camera	camera;
 	t_ray		light;
@@ -224,7 +226,8 @@ float		intersects_cylinder_side(t_camera *ray, t_object *cylinder);
 void		render(t_minirt *mrt);
 t_vec3		get_hit_normal(t_object *ob, t_vec3 hit_point);
 t_camera	create_camera_ray(t_camera *camera, t_vec2 *pixel);
-void		modulate_colour(t_colour *colour, float light_intensity);
+void		add_ambient(t_minirt *mrt);
+void		modulate_colour(t_minirt *mrt, t_colour *final, float light_intensity);
 float		diffusion(t_minirt *mrt, t_camera *camera_ray, t_object *object,
 				float t);
 int			calculate_colour(t_minirt *mrt, t_vec2 *pixel);

@@ -6,11 +6,12 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:55:05 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/30 10:25:04 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:33:55 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <stdio.h>
 
 int	check_if_normalised(t_vec3 orientation, char *object)
 {
@@ -20,6 +21,14 @@ int	check_if_normalised(t_vec3 orientation, char *object)
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd(object, 2);
 		ft_putstr_fd(" orientation is not a normalised vector\n", 2);
+		vec3_normalise(&orientation);
+		if ((vec3_length(orientation) - 1) <= -0.002
+			|| (vec3_length(orientation) - 1) >= 0.002)
+			ft_putstr_fd("please add values between -1 and 1 "
+				"with a combined value close to 1", 2);
+		else
+			printf("Try:\n%f,%f,%f\n", orientation.x,
+				orientation.y, orientation.z);
 		return (1);
 	}
 	return (0);

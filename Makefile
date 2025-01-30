@@ -6,7 +6,7 @@
 #    By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 10:50:10 by arissane          #+#    #+#              #
-#    Updated: 2025/01/27 10:50:04 by arissane         ###   ########.fr        #
+#    Updated: 2025/01/30 11:49:32 by arissane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS = main.c \
        utils.c \
        render.c \
        calculate_colour.c \
+       modify_colours.c \
        trace_ray.c \
        camera_ray.c \
        light_diffusion.c \

@@ -6,26 +6,11 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:39:02 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/24 14:05:39 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/01/30 11:49:07 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-/**
- * 	@brief
- * 	After getting the light brightness and diffusion intensity, then we change
- * 	the base colour.
- */
-void	modulate_colour(t_colour *colour, float light_intensity)
-{
-	if (light_intensity < 0.0f)
-		light_intensity = 0.0f;
-	if (light_intensity > 1.0f)
-		light_intensity = 1.0f;
-	colour->red = (int)(colour->red * light_intensity);
-	colour->green = (int)(colour->green * light_intensity);
-	colour->blue = (int)(colour->blue * light_intensity);
-}
 
 /**
  * 	@brief
