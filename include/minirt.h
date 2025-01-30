@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:55:13 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/30 09:53:30 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:12:02 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../minilibx-linux/mlx.h"
 # include <math.h>
 # include <stdbool.h>
+# include <errno.h>
 
 # ifndef WIN_WIDTH
 #  define WIN_WIDTH 300
@@ -164,6 +165,7 @@ void		free_window(t_minirt *mrt);
 int			end_event(t_minirt *mrt);
 t_vec4		angle_to_quaternion(t_vec3 *axis, float angle);
 void		free_array(char **array);
+void		fatal_error(char *message, int error);
 
 /**** handle input ****/
 int			key_input(int keycode, t_minirt *mrt);

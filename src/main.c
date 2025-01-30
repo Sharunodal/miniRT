@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:53:49 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/30 10:23:39 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:11:05 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,21 @@ static void	print_controls(void)
 	ft_putstr_fd(BL"\n************************************************\n"RS, 1);
 }
 
-static int	initialise(t_minirt *mrt)
+static void	initialise(t_minirt *mrt)
 {
 	mrt->mlx = mlx_init();
 	if (!mrt->mlx)
-		return (write_error("mlx init failed"));
+		fatal_error("mlx init failed", ENOMEM);
 	mrt->win = mlx_new_window(mrt->mlx, WIN_WIDTH, WIN_HEIGHT, "miniRT");
 	if (!mrt->win)
-		return (write_error("mlx init window failed"));
+		fatal_error("mlx init window failed", ENOMEM);
 	mrt->img = mlx_new_image(mrt->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!mrt->img)
-		return (write_error("mlx init image failed"));
+		fatal_error("mlx init image failed", ENOMEM);
 	mrt->data_addr = mlx_get_data_addr(mrt->img, &mrt->bits_per_pixel,
 			&mrt->line_length, &mrt->endian);
 	if (!mrt->data_addr)
-		return (write_error("mlx init data addresses failed"));
-	return (0);
+		fatal_error("mlx init data addresses failed", ENOMEM);
 }
 
 static int	check_window_size(void)
@@ -81,8 +80,7 @@ int	main(int argc, char **argv)
 			free(mrt.object);
 		return (1);
 	}
-	if (initialise(&mrt) == 1)
-		return (end_event(&mrt));
+	initialise(&mrt);
 	render(&mrt);
 	print_controls();
 	mlx_hook(mrt.win, 17, 0, end_event, &mrt);
