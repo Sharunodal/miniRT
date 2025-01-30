@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:55:13 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/30 12:57:07 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:18:30 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,8 @@ void		render(t_minirt *mrt);
 t_vec3		get_hit_normal(t_object *ob, t_vec3 hit_point);
 t_camera	create_camera_ray(t_camera *camera, t_vec2 *pixel);
 void		add_ambient(t_minirt *mrt);
-void		modulate_colour(t_minirt *mrt, t_colour *final, float light_intensity);
+void		modulate_colour(t_minirt *mrt, t_colour *final,
+				float light_intensity);
 float		diffusion(t_minirt *mrt, t_camera *camera_ray, t_object *object,
 				float t);
 int			calculate_colour(t_minirt *mrt, t_vec2 *pixel);

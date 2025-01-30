@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:53:49 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/30 11:11:05 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:45:15 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,32 @@ static void	print_controls(void)
 	ft_putstr_fd(BL"\n************************************************\n"RS, 1);
 }
 
-static void	initialise(t_minirt *mrt)
+static void	check_number_of_elements(t_minirt *mrt)
 {
+	if (mrt->camera_count == 0)
+		ft_putstr_fd("Warning\nNo camera found in the rt file\n", 1);
+	else if (mrt->ambient_count == 0 && mrt->light_count == 0)
+		ft_putstr_fd("Warning\nNo light source or ambient light found "
+			"in the rt file\n", 1);
+}
+
+static void	initialise(t_minirt *mrt, char *filename)
+{
+	int		i;
+	char	*name;
+
+	i = 0;
+	name = filename;
+	while (filename[i])
+	{
+		if (filename[i] == '/' && filename[i + 1])
+			name = &filename[i + 1];
+		i++;
+	}
 	mrt->mlx = mlx_init();
 	if (!mrt->mlx)
 		fatal_error("mlx init failed", ENOMEM);
-	mrt->win = mlx_new_window(mrt->mlx, WIN_WIDTH, WIN_HEIGHT, "miniRT");
+	mrt->win = mlx_new_window(mrt->mlx, WIN_WIDTH, WIN_HEIGHT, name);
 	if (!mrt->win)
 		fatal_error("mlx init window failed", ENOMEM);
 	mrt->img = mlx_new_image(mrt->mlx, WIN_WIDTH, WIN_HEIGHT);
@@ -80,7 +100,8 @@ int	main(int argc, char **argv)
 			free(mrt.object);
 		return (1);
 	}
-	initialise(&mrt);
+	check_number_of_elements(&mrt);
+	initialise(&mrt, argv[1]);
 	render(&mrt);
 	print_controls();
 	mlx_hook(mrt.win, 17, 0, end_event, &mrt);
