@@ -6,7 +6,7 @@
 /*   By: arissane <arissane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:15:56 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/13 13:10:14 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:22:38 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void	free_window(t_minirt *mrt)
 int	end_event(t_minirt *mrt)
 {
 	free_window(mrt);
-	return (0);
+	return (1);
 }

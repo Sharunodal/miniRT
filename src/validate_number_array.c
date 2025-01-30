@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:19:21 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/28 09:34:31 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/01/30 10:25:43 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	validate_decimal_string(char *str)
 	if (!str[i])
 		return (1);
 	if (non_integer_checking(str, i) == 1)
-	 	return (1);
+		return (1);
 	if (str[i] && str[i] == '.')
 	{
 		i++;

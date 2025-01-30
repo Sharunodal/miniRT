@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:55:13 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/27 11:03:44 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 09:53:30 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ int			check_ambient_data(t_minirt *mrt, char **values);
 int			check_number_of_variables(char **values, int min, int max);
 int			add_colour_values(t_colour *colour, char *str, char *target);
 int			add_xyz_values(t_vec3 *xyz, char *str, char *target, int type);
+int			check_if_normalised(t_vec3 orientation, char *object);
 int			write_error(char *str);
 int			ft_strcmp(const char *s1, const char *s2);
 int			validate_number_array(char **array, int type);

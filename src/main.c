@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:53:49 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/30 09:10:04 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:23:39 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,22 @@ static void	print_controls(void)
 	ft_putstr_fd(BL"\n************************************************\n"RS, 1);
 }
 
-static void	initialise(t_minirt *mrt)
+static int	initialise(t_minirt *mrt)
 {
 	mrt->mlx = mlx_init();
+	if (!mrt->mlx)
+		return (write_error("mlx init failed"));
 	mrt->win = mlx_new_window(mrt->mlx, WIN_WIDTH, WIN_HEIGHT, "miniRT");
+	if (!mrt->win)
+		return (write_error("mlx init window failed"));
 	mrt->img = mlx_new_image(mrt->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!mrt->img)
+		return (write_error("mlx init image failed"));
 	mrt->data_addr = mlx_get_data_addr(mrt->img, &mrt->bits_per_pixel,
 			&mrt->line_length, &mrt->endian);
+	if (!mrt->data_addr)
+		return (write_error("mlx init data addresses failed"));
+	return (0);
 }
 
 static int	check_window_size(void)
@@ -67,8 +76,13 @@ int	main(int argc, char **argv)
 		return (1);
 	ft_bzero(&mrt, sizeof(t_minirt));
 	if (read_rt_file(&mrt, argv[1]) == 1)
+	{
+		if (mrt.object)
+			free(mrt.object);
 		return (1);
-	initialise(&mrt);
+	}
+	if (initialise(&mrt) == 1)
+		return (end_event(&mrt));
 	render(&mrt);
 	print_controls();
 	mlx_hook(mrt.win, 17, 0, end_event, &mrt);

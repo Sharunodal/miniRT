@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:03:10 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/28 10:36:27 by jingwu           ###   ########.fr       */
+/*   Updated: 2025/01/30 09:53:21 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ int	check_camera_data(t_minirt *mrt, char **values)
 	if (add_xyz_values(&mrt->camera.direction, values[2],
 			"Camera orientation ", 2) == 1)
 		return (1);
-	if ((vec3_length(mrt->camera.direction) - 1) <= -0.002
-		|| (vec3_length(mrt->camera.direction) - 1) >= 0.002)
-		return (write_error("Camera direction is not a normal vector"));
+	if (check_if_normalised(mrt->camera.direction, "Camera") == 1)
+		return (1);
 	mrt->camera.fov = ft_atoi(values[3]);
 	if (mrt->camera.fov < 0 || mrt->camera.fov > 180)
 		return (write_error("Camera FOV should be between 0 to 180"));
@@ -93,7 +92,7 @@ int	check_light_data(t_minirt *mrt, char **values)
 			"Light coordinates ", 1) == 1)
 		return (1);
 	if (validate_decimal_string(values[2]) == 1)
-		return (write_error("Syntax error; the light brightness "
+		return (write_error("Light brightness "
 				"ratio should be a decimal number"));
 	mrt->light.brightness = ft_atofloat(values[2]);
 	if (mrt->light.brightness > 1.0 || mrt->light.brightness < 0.0)
