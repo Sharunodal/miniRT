@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:53:49 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/28 10:04:36 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/30 09:10:04 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ int	main(int argc, char **argv)
 	t_minirt	mrt;
 
 	if (argc != 2 || argv[1] == NULL)
-	{
-		ft_putstr_fd("Error\nInvalid number of arguments\n", 2);
-		return (1);
-	}
+		return (write_error("Invalid number of arguments"));
 	if (check_window_size() == 1)
 		return (1);
 	ft_bzero(&mrt, sizeof(t_minirt));

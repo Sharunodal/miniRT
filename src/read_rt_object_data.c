@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:55:05 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/23 13:57:19 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:37:54 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int	check_sphere_data(t_minirt *mrt, char **values)
 	mrt->object_count++;
 	return (0);
 }
-
+/**
+ * @brief the float 0.002 is select by real example, like a vector
+ * {0.577,0.577,0.577}
+ */
 int	check_plane_data(t_minirt *mrt, char **values)
 {
 	t_object	plane;
@@ -55,6 +58,9 @@ int	check_plane_data(t_minirt *mrt, char **values)
 	if (add_xyz_values(&plane.orientation, values[2],
 			"Plane orientation ", 2) == 1)
 		return (1);
+	if ((vec3_length(plane.orientation) - 1) <= -0.002
+		|| (vec3_length(plane.orientation) - 1) >= 0.002)
+		return (write_error("Plane orientation is not a normal vector"));
 	plane.rotation = vec3_to_quaternion(&plane.orientation);
 	if (add_colour_values(&plane.colour, values[3], "Plane ") == 1)
 		return (1);
@@ -99,6 +105,9 @@ int	check_cylinder_data(t_minirt *mrt, char **values)
 	if (add_xyz_values(&cylinder.orientation, values[2],
 			"Cylinder orientation ", 2) == 1)
 		return (1);
+	if ((vec3_length(cylinder.orientation) - 1) <= -0.002
+		|| (vec3_length(cylinder.orientation) - 1) >= 0.002)
+		return (write_error("Cylinder orientation is not a normal vector"));
 	if (check_cylinder_data2(&cylinder, values) == 1)
 		return (1);
 	mrt->object[mrt->object_count] = cylinder;
