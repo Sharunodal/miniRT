@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:55:05 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/30 11:33:55 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:35:21 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	check_if_normalised(t_vec3 orientation, char *object)
 				orientation.y, orientation.z);
 		return (1);
 	}
+	vec3_normalise(&orientation);
 	return (0);
 }
 

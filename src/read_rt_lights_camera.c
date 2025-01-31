@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:03:10 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/30 09:53:21 by arissane         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:50:03 by jingwu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,21 @@ int	check_ambient_data(t_minirt *mrt, char **values)
 	return (0);
 }
 
+int	are_all_integers(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	if (str[0] == '+' || str[0] == '-')
+		i++;
+	if (validate_number_string(&str[i]) == 1)
+		return (1);
+	else
+		return (0);
+}
+
 int	check_camera_data(t_minirt *mrt, char **values)
 {
 	mrt->camera_count++;
@@ -71,6 +86,8 @@ int	check_camera_data(t_minirt *mrt, char **values)
 		return (1);
 	if (check_if_normalised(mrt->camera.direction, "Camera") == 1)
 		return (1);
+	if (are_all_integers(values[3]) == 1)
+		return (write_error("Camera FOV is not an int number"));
 	mrt->camera.fov = ft_atoi(values[3]);
 	if (mrt->camera.fov < 0 || mrt->camera.fov > 180)
 		return (write_error("Camera FOV should be between 0 to 180"));
