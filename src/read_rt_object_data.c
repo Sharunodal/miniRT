@@ -6,12 +6,11 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:55:05 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/31 09:35:21 by arissane         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:29:23 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <stdio.h>
 
 int	check_if_normalised(t_vec3 orientation, char *object)
 {
@@ -119,7 +118,7 @@ int	check_cylinder_data(t_minirt *mrt, char **values)
 	if (allocate_new_object(mrt) == 1)
 		return (1);
 	if (check_number_of_variables(values, 6, 6) == 1)
-		return (write_error("Cylinder; invalid number of variables"));
+		return (write_error("Invalid number of variables for a cylinder"));
 	cylinder.shape = CYLINDER;
 	cylinder.id = mrt->object_count + 1;
 	if (add_xyz_values(&cylinder.position, values[1],

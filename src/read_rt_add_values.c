@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:00:06 by arissane          #+#    #+#             */
-/*   Updated: 2025/01/31 12:28:31 by arissane         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:48:55 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	write_error2(char **values, char *target, char *message)
 {
-	ft_putstr_fd("Error!\n", 2);
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(target, 2);
 	ft_putstr_fd(message, 2);
 	ft_putchar_fd('\n', 2);
@@ -47,9 +47,6 @@ int	add_colour_values(t_colour *colour, char *str, char *target)
 	if (i != 3)
 		return (write_error2(colours, target, "should have 3 colour values"));
 	if (validate_number_array(colours, 1) == 1)
-		return (write_error2(colours, target, "colours should be integers"));
-	if (are_all_integers(colours[0]) == 1 || are_all_integers(colours[1]) == 1
-		|| are_all_integers(colours[2]) == 1)
 		return (write_error2(colours, target, "colours should be integers"));
 	colour->red = ft_atoi(colours[0]);
 	colour->green = ft_atoi(colours[1]);
