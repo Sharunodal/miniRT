@@ -6,7 +6,7 @@
 /*   By: jingwu <jingwu@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:00:06 by arissane          #+#    #+#             */
-/*   Updated: 2025/02/03 14:48:55 by arissane         ###   ########.fr       */
+/*   Updated: 2025/02/04 08:37:43 by arissane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	add_xyz_values(t_vec3 *xyz, char *str, char *target, int type)
 	if (i != 3)
 		return (write_error2(values, target, "should be 3 values"));
 	if (validate_number_array(values, 2) == 1)
-		return (write_error2(values, target, "should be decimal numbers"));
+		return (write_error2(values, target, "should be decimals"));
 	xyz->x = ft_atofloat(values[0]);
 	xyz->y = ft_atofloat(values[1]);
 	xyz->z = ft_atofloat(values[2]);
