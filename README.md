@@ -82,6 +82,7 @@ This will:
 - clone minilibx-linux if it is not already present
 - build MiniLibX
 - compile the project into the miniRT executable
+
 It is also possible to define the window size when running `make`, for example:
 ```bash
 make WIN_WIDTH=1600 WIN_HEIGHT=1024
