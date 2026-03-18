@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Locate the first occurrence of a character in a string
+ */
 char	*ft_strchr(const char *s, int c)
 {
 	int		a;

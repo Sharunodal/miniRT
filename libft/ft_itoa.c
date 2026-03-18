@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/**
+ * Calculate the length of the number when converted to a string in order to
+ * allocate the correct amount of memory for the string
+ */ 
 static int	length(int n)
 {
 	int		len;
@@ -32,6 +36,10 @@ static int	length(int n)
 	return (len);
 }
 
+/**
+ * Add the number to the string in reverse order, since we get the last digit
+ * first when using modulo 10
+ */
 static char	*addnb(char *str, int n, int len, int sign)
 {
 	if (n == -2147483648)
@@ -54,6 +62,9 @@ static char	*addnb(char *str, int n, int len, int sign)
 	return (str);
 }
 
+/**
+ * Convert an integer to a string
+ */
 char	*ft_itoa(int n)
 {
 	char	*str;

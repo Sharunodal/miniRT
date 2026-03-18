@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * Helper function for ft_printf to calculate the length of a number
+ */
 int	ft_nbr_len_printf(long val, char c)
 {
 	int	len;

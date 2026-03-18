@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Helper function to copy memory when regions do not overlap
+ */
 static void	copystr(char *dest, char *sorc, size_t len)
 {
 	size_t	a;
@@ -24,6 +27,9 @@ static void	copystr(char *dest, char *sorc, size_t len)
 	}
 }
 
+/**
+ * Copy a block of memory from source to destination, handling overlapping regions
+ */
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	char	*dest;

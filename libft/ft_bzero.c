@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+
+/**
+ * Set a block of memory to zero
+ */ 
 void	ft_bzero(void *s, size_t n)
 {
 	char	*str;

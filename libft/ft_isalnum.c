@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
+/**
+ * Check if a character is alphanumeric. Takes in an int in order to
+ * accommodate the full range of ASCII values.
+ */ 
 int	ft_isalnum(int c)
 {
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))

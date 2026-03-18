@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Copy a string to a destination buffer of given size
+ */
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	a;

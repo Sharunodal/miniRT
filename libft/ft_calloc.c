@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+
+/**
+ * Allocate memory for an array and set all bytes to zero
+ */ 
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*temp;

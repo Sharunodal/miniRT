@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Convert a number to its hexadecimal string representation
+ */
 static void	hex_str(size_t argval, char c, char *str, int len)
 {
 	long	temp;
@@ -31,6 +34,9 @@ static void	hex_str(size_t argval, char c, char *str, int len)
 	}
 }
 
+/**
+ * Helper function for ft_printf to print a hexadecimal number
+ */
 int	ft_puthex_printf(size_t argval, char c)
 {
 	int		len;

@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Convert a number to its string representation
+ */
 static void	nbr_str(long argval, char *str, int len)
 {
 	long	temp;
@@ -26,6 +29,9 @@ static void	nbr_str(long argval, char *str, int len)
 	}
 }
 
+/**
+ * Helper function for ft_printf to print a number
+ */
 int	ft_putnbr_printf(long argval, char c)
 {
 	int		len;

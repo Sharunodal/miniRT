@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Free the memory allocated for a string and set its pointer to NULL
+ */
 char	*free_address(char **str)
 {
 	if (str && *str)
@@ -22,6 +25,9 @@ char	*free_address(char **str)
 	return (NULL);
 }
 
+/**
+ * Update saved_text to contain the remaining text after extracting a line
+ */
 static char	*new_line(char *saved_text)
 {
 	char	*new_line;
@@ -41,6 +47,9 @@ static char	*new_line(char *saved_text)
 	return (new_line);
 }
 
+/**
+ * Extract a line from saved_text up to and including the newline character
+ */
 static char	*get_line(char *saved_text)
 {
 	char	*line;
@@ -63,6 +72,9 @@ static char	*get_line(char *saved_text)
 	return (line);
 }
 
+/**
+ * Read from the file descriptor until a newline is found or EOF is reached
+ */
 static char	*read_line(int fd, char *saved_text)
 {
 	ssize_t	bytes;
@@ -91,6 +103,9 @@ static char	*read_line(int fd, char *saved_text)
 	return (free_address(&saved_text));
 }
 
+/**
+ * Read a line from a file descriptor
+ */
 char	*get_next_line(int fd)
 {
 	static char	*saved_text;

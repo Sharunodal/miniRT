@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
+/**
+ * Use a long long int in order to handle overflow cases
+ */ 
 static long long int	check_number(const char *str, long long int i,
 								long long int number, int sign)
 {
@@ -29,6 +33,9 @@ static long long int	check_number(const char *str, long long int i,
 	return (number);
 }
 
+/**
+ * Find a group of digits in a string and convert them to an integer
+ */
 int	ft_atoi(const char *str)
 {
 	long long int	i;

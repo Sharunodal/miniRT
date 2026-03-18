@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
+/**
+ * Check if a character is an ASCII character. Takes in an int in order to
+ * accommodate the full range of ASCII values.
+ */
 int	ft_isascii(int c)
 {
 	if (c >= 0 && c <= 127)

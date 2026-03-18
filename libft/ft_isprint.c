@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * Check if a character is printable. Takes in an int in order to
+ * accommodate the full range of ASCII values.
+ */
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)

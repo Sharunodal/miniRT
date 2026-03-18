@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Set a block of memory to a specific value
+ */
 void	*ft_memset(void *b, int c, size_t len)
 {
 	unsigned char	*str;

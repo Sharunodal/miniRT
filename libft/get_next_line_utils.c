@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Calculate the length of a string up to a specified character
+ */
 size_t	strlen_gnl(char	*str, char c)
 {
 	size_t	i;
@@ -24,6 +27,9 @@ size_t	strlen_gnl(char	*str, char c)
 	return (i);
 }
 
+/**
+ * Locate the first occurrence of a character in a string
+ */
 char	*strchr_gnl(char *str, int c)
 {
 	size_t		i;
@@ -42,6 +48,9 @@ char	*strchr_gnl(char *str, int c)
 	return (NULL);
 }
 
+/**
+ * Helper function to join two strings
+ */
 static char	*strjoinh_gnl(char *saved_text, char *buffer, char *str)
 {
 	size_t	i;
@@ -63,6 +72,9 @@ static char	*strjoinh_gnl(char *saved_text, char *buffer, char *str)
 	return (str);
 }
 
+/**
+ * Join two strings together, freeing the first string
+ */
 char	*strjoin_gnl(char *saved_text, char *buffer)
 {
 	char	*str;
@@ -86,6 +98,9 @@ char	*strjoin_gnl(char *saved_text, char *buffer)
 	return (str);
 }
 
+/**
+ * Extract a substring from saved_text starting at 'start' index with length 'len'
+ */
 char	*substr_gnl(char *saved_text, size_t start, size_t len, size_t i)
 {
 	char	*str;

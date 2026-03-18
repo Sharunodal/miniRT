@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Iterate through a linked list and apply a function to each element's content
+ */
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	t_list	*templst;

@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Find the starting index after trimming characters from the start
+ */
 static int	startpoint(char const *s1, char const *set)
 {
 	int	a;
@@ -35,6 +38,9 @@ static int	startpoint(char const *s1, char const *set)
 	return (start);
 }
 
+/**
+ * Find the endpoint index after trimming characters from the end
+ */
 static int	endpoint(char const *s1, char const *set, int len)
 {
 	int	a;
@@ -58,6 +64,9 @@ static int	endpoint(char const *s1, char const *set, int len)
 	return (len - end);
 }
 
+/**
+ * Write the trimmed string into the newly allocated memory
+ */
 static char	*wrtstr(char const *s1, char *str, size_t start, int end)
 {
 	int	a;
@@ -76,6 +85,9 @@ static char	*wrtstr(char const *s1, char *str, size_t start, int end)
 	return (str);
 }
 
+/**
+ * Trim characters from the start and end of a string based on a set of characters
+ */
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		start;

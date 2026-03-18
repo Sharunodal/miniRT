@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Count the number of substrings in the string separated by the delimiter
+ */
 static size_t	string_count(char const *s, char c)
 {
 	size_t	a;
@@ -28,6 +31,9 @@ static size_t	string_count(char const *s, char c)
 	return (b);
 }
 
+/**
+ * Free all allocated memory in case of failure
+ */
 static void	free_all(char **array)
 {
 	size_t	a;
@@ -41,6 +47,9 @@ static void	free_all(char **array)
 	free(array);
 }
 
+/**
+ * Add the substrings to the allocated array
+ */
 static void	add_strings(char **array, char const *s, char c, size_t d)
 {
 	size_t	a;
@@ -70,6 +79,9 @@ static void	add_strings(char **array, char const *s, char c, size_t d)
 	array[b] = (NULL);
 }
 
+/**
+ * Allocate memory for each string and handle allocation failures
+ */
 static char	**allocation(char **array, char const *s, char c, size_t a)
 {
 	size_t	b;
@@ -99,6 +111,9 @@ static char	**allocation(char **array, char const *s, char c, size_t a)
 	return (array);
 }
 
+/**
+ * Split a string into an array of strings using a given delimiter
+ */
 char	**ft_split(char const *s, char c)
 {
 	char	**array;

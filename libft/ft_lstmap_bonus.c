@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/**
+ * Iterate through a linked list, apply a function to each element's content,
+ * and create a new list from the results. If allocation fails, free the new list.
+ */
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*newlst;

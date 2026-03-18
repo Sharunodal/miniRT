@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Determine the type of format specifier and call the appropriate helper function
+ */
 static int	check_type(char c, va_list arguments)
 {
 	void	*ptr;
@@ -39,6 +42,9 @@ static int	check_type(char c, va_list arguments)
 	return (ft_putchar_printf('%') + ft_putchar_printf(c));
 }
 
+/**
+ * Process the format string and handle format specifiers
+ */
 static int	check_input(const char *str, va_list arguments, int i, int len)
 {
 	int		check;
@@ -65,6 +71,9 @@ static int	check_input(const char *str, va_list arguments, int i, int len)
 	return (len);
 }
 
+/**
+ * A simplified version of printf that handles basic format specifiers
+ */
 int	ft_printf(const char *str, ...)
 {
 	va_list	arguments;

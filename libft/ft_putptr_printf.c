@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Calculate the length of a pointer's hexadecimal representation
+ */
 static int	ptr_len(size_t argval)
 {
 	int	len;
@@ -25,6 +28,9 @@ static int	ptr_len(size_t argval)
 	return (len);
 }
 
+/**
+ * Convert a number to its hexadecimal string representation
+ */
 static void	hex_str(size_t argval, char *str, int len)
 {
 	long	temp;
@@ -42,6 +48,9 @@ static void	hex_str(size_t argval, char *str, int len)
 	}
 }
 
+/**
+ * Helper function for ft_printf to print a pointer address
+ */
 int	ft_putptr_printf(size_t argval)
 {
 	int		len;

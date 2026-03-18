@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
+/**
+ * Check if a character is alphabetic. Takes in an int in order to
+ * accommodate the full range of ASCII values.
+ */ 
 int	ft_isalpha(int c)
 {
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))

@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Concatenate two strings, ensuring the destination buffer is not overflowed
+ */
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	a;

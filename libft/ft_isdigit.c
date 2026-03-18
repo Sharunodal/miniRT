@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * Check if a character is a digit. Takes in an int in order to
+ * accommodate the full range of ASCII values.
+ */
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')

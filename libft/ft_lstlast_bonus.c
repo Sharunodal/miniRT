@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Return the last element of a linked list
+ */
 t_list	*ft_lstlast(t_list *lst)
 {
 	t_list	*templst;

@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/**
+ * Helper function for ft_printf to print a single character and
+ * return the number of characters printed
+ */
 int	ft_putchar_printf(char c)
 {
 	int	check;

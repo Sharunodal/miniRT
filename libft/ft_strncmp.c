@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Compare two strings up to a specified number of characters
+ */
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	a;

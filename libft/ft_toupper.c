@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * Convert a lowercase letter to uppercase. Takes in an int in order to
+ * accommodate the full range of ASCII values.
+ */
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')

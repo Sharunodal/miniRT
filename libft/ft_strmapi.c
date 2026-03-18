@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Create a new string by applying a function to each character of the input string
+ */
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*str;

@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Join two strings into a new string by allocating memory
+ */
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;

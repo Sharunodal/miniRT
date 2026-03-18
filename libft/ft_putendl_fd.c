@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Write a string followed by a newline to a given file descriptor
+ */
 void	ft_putendl_fd(char *s, int fd)
 {
 	int	i;

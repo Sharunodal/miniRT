@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Clear and free a linked list
+ */
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*templst;

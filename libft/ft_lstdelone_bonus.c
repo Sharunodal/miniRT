@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Delete and free a single element of a linked list
+ */
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (!lst || !del)

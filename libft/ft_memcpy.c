@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/**
+ * Copy a block of memory from source to destination
+ */
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	char	*dest;
